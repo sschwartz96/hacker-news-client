@@ -1,10 +1,9 @@
 <script>
   import { category } from '../stores';
 
-  const categories = ['New', 'Top', 'Best'];
+  const categories = ['Top', 'New', 'Best'];
 
-  const setCategory = (x) => $category = x;
-
+  const setCategory = (x) => ($category = x);
 </script>
 
 <div class="header">
@@ -12,11 +11,8 @@
   <div class="menu-container">
     <ul>
       {#each categories as cat}
-        <li 
-       class:current={$category === cat}
-       on:click="{() => setCategory(cat)}"
-       >
-       {cat}
+        <li class:current={$category === cat} on:click={() => setCategory(cat)}>
+          {cat}
         </li>
       {/each}
     </ul>
@@ -52,7 +48,8 @@
     transition: background 100ms;
     transition-timing-function: ease-in;
   }
-  .menu-container > ul li:hover,  .current {
+  .menu-container > ul li:hover,
+  .current {
     color: white;
     background: rgba(204, 82, 0, 0.8);
   }
