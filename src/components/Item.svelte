@@ -25,4 +25,14 @@
   .item-container {
     padding: 16px;
   }
+  a {
+    color: black;
+    text-decoration: none;
+  }
+  a:visited {
+    color: rgba(100, 100, 100, 1);
+  }
+  .title {
+    font-weight: bold;
+  }
 </style>

@@ -1,7 +1,7 @@
 <script>
-  import { category } from '../stores';
+  import { category } from "../stores";
 
-  const categories = ['Top', 'New', 'Best'];
+  const categories = ["Top", "New", "Best"];
 
   const setCategory = (x) => ($category = x);
 </script>
@@ -21,8 +21,6 @@
 
 <style>
   .header {
-    position: relative;
-    width: 100%;
     padding: 24px;
     background: rgb(235, 235, 235);
   }
@@ -43,7 +41,7 @@
     cursor: pointer;
     margin-right: 20px;
     padding: 8px;
-    width: 40px;
+    width: 60px;
     text-align: center;
     transition: background 100ms;
     transition-timing-function: ease-in;

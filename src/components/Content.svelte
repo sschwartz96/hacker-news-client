@@ -1,9 +1,9 @@
 <script>
-  import { ids } from '../stores';
-  import Item from './Item.svelte';
-  import axios from 'axios';
+  import { ids } from "../stores";
+  import Item from "./Item.svelte";
+  import axios from "axios";
 
-  const API_URL = 'https://hacker-news.firebaseio.com/v0';
+  const API_URL = "https://hacker-news.firebaseio.com/v0";
   let lastIndex = 15;
 
   const getItems = async (itemIDs) => {
@@ -22,13 +22,13 @@
     const data = await axios
       .get(`${API_URL}/item/${id}.json`)
       .then((resp) => resp.data)
-      .catch(() => 'error');
+      .catch(() => "error");
     return data;
   };
 
   $: showItems = async () => {
     const curIDs = $ids;
-    if (curIDs === 'error') throw new Error('showItems() error');
+    if (curIDs === "error") throw new Error("showItems() error");
     const shownIDs = curIDs.filter((_, i) => i < lastIndex);
     return getItems(shownIDs);
   };
