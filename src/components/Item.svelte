@@ -1,4 +1,5 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   /*   "by" : "dhouston", */
   /*   "descendants" : 71, */
   /*   "id" : 8863, */
@@ -9,6 +10,13 @@
   /*   "type" : "story", */
   /*   "url" : "http://www.getdropbox.com/u/2/screencast.html" */
 
+  const dispatch = createEventDispatcher();
+
+  const handleCommentsOnClick = (itemID) => {
+    console.log('handleCommentsOnClick, id: ', itemID);
+    dispatch('comment', itemID);
+  };
+
   export let item;
 </script>
 
@@ -18,6 +26,9 @@
       ><span class="title">{item.title}</span></a
     >
     by <span class="by">{item.by}</span>
+    <span class="comments" on:click={() => handleCommentsOnClick(item.kids)}>
+      Comments
+    </span>
   </div>
 </div>
 

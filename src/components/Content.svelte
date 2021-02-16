@@ -1,29 +1,17 @@
 <script>
   import { ids } from '../stores';
   import Item from './Item.svelte';
-  import axios from 'axios';
+  import Comments from './Comments.svelte';
+  import { getItems } from '../api';
 
-  const API_URL = 'https://hacker-news.firebaseio.com/v0';
   let lastIndex = 15;
+  let commentIDs = undefined;
 
-  const getItems = async (itemIDs) => {
-    if (!itemIDs) return [];
-    const items = [];
-
-    await Promise.all(
-      itemIDs.map(async (id, i) => {
-        items[i] = await getItem(id);
-      })
-    );
-    return items;
+  const handleComments = (event) => {
+    commentIDs = event.detail;
   };
-
-  const getItem = async (id) => {
-    const data = await axios
-      .get(`${API_URL}/item/${id}.json`)
-      .then((resp) => resp.data)
-      .catch(() => 'error');
-    return data;
+  const onBack = () => {
+    commentIDs = undefined;
   };
 
   $: showItems = async () => {
@@ -35,19 +23,26 @@
 </script>
 
 <div class="content-container">
-  <ul>
-    {#if $ids}
-      {#await showItems()}
-        <span>Loading...</span>
-      {:then items}
-        {#each items as item}
-          <Item {item} />
-        {/each}
-      {:catch error}
-        <span style="color: red">Network Error. Please try again. {error}</span>
-      {/await}
-    {/if}
-  </ul>
+  {#if commentIDs}
+    <button on:click={onBack}>Back</button>
+    <Comments cIDs={commentIDs} />
+  {:else}
+    <ul>
+      {#if $ids}
+        {#await showItems()}
+          <span>Loading...</span>
+        {:then items}
+          {#each items as item}
+            <Item {item} on:comment={handleComments} />
+          {/each}
+        {:catch error}
+          <span style="color: red"
+            >Network Error. Please try again. {error}</span
+          >
+        {/await}
+      {/if}
+    </ul>
+  {/if}
 </div>
 
 <style>
