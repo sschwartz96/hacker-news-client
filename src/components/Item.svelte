@@ -12,9 +12,9 @@
 
   const dispatch = createEventDispatcher();
 
-  const handleCommentsOnClick = (itemID) => {
-    console.log('handleCommentsOnClick, id: ', itemID);
-    dispatch('comment', itemID);
+  const handleCommentsOnClick = (itemIDs) => {
+    console.log('handleCommentsOnClick, id: ', itemIDs);
+    dispatch('comment', itemIDs);
   };
 
   export let item;
@@ -35,5 +35,15 @@
 <style>
   .item-container {
     padding: 16px;
+  }
+  a {
+    color: black;
+    text-decoration: none;
+  }
+  a:visited {
+    color: rgba(100, 100, 100, 1);
+  }
+  .title {
+    font-weight: bold;
   }
 </style>

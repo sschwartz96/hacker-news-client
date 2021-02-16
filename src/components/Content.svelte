@@ -5,13 +5,15 @@
   import { getItems } from '../api';
 
   let lastIndex = 15;
-  let commentIDs = undefined;
+  let cIDs = undefined;
 
   const handleComments = (event) => {
-    commentIDs = event.detail;
+    console.log('event:', event);
+    cIDs = event.detail;
   };
+
   const onBack = () => {
-    commentIDs = undefined;
+    cIDs = undefined;
   };
 
   $: showItems = async () => {
@@ -23,9 +25,9 @@
 </script>
 
 <div class="content-container">
-  {#if commentIDs}
+  {#if cIDs}
     <button on:click={onBack}>Back</button>
-    <Comments cIDs={commentIDs} />
+    <Comments {cIDs} />
   {:else}
     <ul>
       {#if $ids}
